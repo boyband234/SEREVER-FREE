@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://via.placeholder.com/1920x1080');
+            background-size: cover;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            animation: slideIn 1s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .login-container h2 {
+            margin-top: 0;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .login-container label {
+            display: block;
+            margin-bottom: 10px;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: calc(100% - 22px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .login-container button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .login-container button:hover {
+            background-color: #45a049;
+        }
+
+        .question {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .question label {
+            display: block;
+            margin-bottom: 10px;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .question input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .question .icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #666;
+        }
+
+        .question .icon.active {
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        #loading {
+            display: none;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #answers {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <label for="code">Kode:</label>
+            <input type="text" id="code" name="code" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Menghentikan aksi default pengiriman formulir
+
+            // Contoh sederhana untuk tujuan demonstrasi:
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const code = document.getElementById("code").value;
+
+            // Lakukan verifikasi login di sini (misalnya, dengan AJAX ke server)
+            // Di sini, Anda dapat menambahkan kode untuk memeriksa apakah username, password, dan kode yang dimasukkan valid
+            if (username === "COXTEAM234" && password === "NOXTEAM098" && code === "040622") {
+                alert("Login berhasil!");
+                // Setelah login berhasil, Anda bisa mengarahkan pengguna ke halaman lain atau melakukan tindakan lainnya
+                redirectToQuiz(); // Panggil fungsi redirectToQuiz() setelah login berhasil
+            } else {
+                alert("Login gagal. Silakan cek kembali username, password, dan kode Anda.");
+            }
+        });
+
+        function redirectToQuiz() {
+            // Pertanyaan tentang Indonesia secara acak
+            const questions = [
+                "Apa ibukota Indonesia?",
+                "Siapakah presiden pertama Indonesia?",
+                "Berapa banyak provinsi di Indonesia?",
+                "Apa nama benua terbesar di dunia?",
+                "Apa warna bendera Indonesia?",
+                "Siapakah pahlawan nasional Indonesia yang dikenal dengan sebutan Bung Karno?",
+                "Apa nama gunung tertinggi di Indonesia?",
+                "Apa nama pulau terbesar di Indonesia?",
+                "Berapa banyak pulau yang dimiliki Indonesia?",
+                "Siapakah penemu bakso, salah satu makanan khas Indonesia?"
+                //Tambahkan 40 pertanyaan lainnya di sini
+            ];
+
+            // Jawaban untuk pertanyaan-pertanyaan tersebut
+            const correctAnswers = [
+                "Jakarta",
+                "Soekarno",
+                "34",
+                "Asia",
+                "Merah dan Putih",
+                "Soekarno",
+                "Puncak Jaya / Carstensz Pyramid",
+                "Kalimantan",
+                "Lebih dari 17.000",
+                "Abraham Samad"
+                //Tambahkan 40 jawaban lainnya di sini
+            ];
+
+            // Acak urutan pertanyaan
+            questions.sort(() => Math.random() - 0.5);
+
+            // Tampilkan formulir pertanyaan untuk 10 pertanyaan pertama
+            displayQuestions(questions.slice(0, 10), correctAnswers.slice(0, 10));
+        }
+
+        function displayQuestions(questions, correctAnswers) {
+            // Tampilkan formulir pertanyaan
+            document.querySelector('.login-container').innerHTML = `
+                <div class="login-container">
+                    <h2>Quiz</h2>
+                    <form id="quizForm">
+                        ${questions.map((question, index) => `
+                            <div class="question">
+                                <label for="q${index + 1}">${question}</label>
+                                <input type="text" id="q${index + 1}" name="q${index + 1}" required>
+                                <i class="icon fas fa-question-circle"></i>
+                            </div>
+                        `).join('')}
+                        <button type="submit">Submit</button>
+                    </form>
+                    <div id="loading">Sedang memeriksa jawaban Anda 😊</div>
+                    <div id="result"></div>
+                    <div id="answers" style="display:none;"></div>
+                </div>
+            `;
+
+            // Setelah formulir pertanyaan dimuat, tambahkan event listener untuk menangani pengisian jawaban
+            document.getElementById("quizForm").addEventListener("submit", function(event) {
+                event.preventDefault(); // Menghentikan aksi default pengiriman formulir
+
+                // Menampilkan adegan loading
+                document.getElementById("loading").style.display = "block";
+
+                // Mengumpulkan jawaban dari formulir
+                const answers = [];
+                for (let i = 1; i <= questions.length; i++) {
+                    const answer = document.getElementById("q" + i).value;
+                    answers.push(answer);
+                }
+
+                // Menunda pemeriksaan jawaban selama 3 detik
+                setTimeout(function() {
+                    // Menyembunyikan adegan loading
+                    document.getElementById("loading").style.display = "none";
+
+                    // Memeriksa jawaban yang benar
+                    let correctCount = 0;
+                    for (let i = 0; i < questions.length; i++) {
+                        if (answers[i].trim().toLowerCase() === correctAnswers[i].toLowerCase()) {
+                            correctCount++;
+                        }
+                    }
+
+                    // Menampilkan hasil
+                    const resultElement = document.getElementById("result");
+                    resultElement.innerHTML = `
+                        <p>Jawaban Anda benar: ${correctCount} dari ${questions.length}</p>
+                    `;
+
+                    // Menampilkan seluruh pertanyaan dan jawaban
+                    const answersElement = document.getElementById("answers");
+                    answersElement.innerHTML = `
+                        <h3>Semua Jawaban</h3>
+                        <ul>
+                            ${questions.map((question, index) => `
+                                <li>${question}: ${answers[index]}</li>
+                            `).join('')}
+                        </ul>
+                    `;
+                    answersElement.style.display = "block";
+
+                }, 3000); // Waktu tunggu 3 detik untuk memeriksa jawaban
+            });
+        }
+    </script>
+</body>
+</html>
